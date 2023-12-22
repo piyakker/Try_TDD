@@ -1,4 +1,7 @@
 
+using CloudCustomers.API.Services;
+using CloudCustomers.API.Services.Interface;
+
 namespace CloudCustomers.API
 {
     public class Program
@@ -13,6 +16,7 @@ namespace CloudCustomers.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddTransient<IUserService, UserService>();
 
             var app = builder.Build();
 

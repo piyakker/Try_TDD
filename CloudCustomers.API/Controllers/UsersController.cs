@@ -1,3 +1,4 @@
+using CloudCustomers.API.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloudCustomers.API.Controllers
@@ -6,14 +7,17 @@ namespace CloudCustomers.API.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        private readonly IUserService _userService;
 
-        public UsersController()
+        public UsersController(IUserService userService)
         {
+            _userService = userService;
         }
 
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> Get()
         {
+            var users = await _userService.GetAllUsers();
             return Ok("all good");
         }
     }
