@@ -47,5 +47,29 @@ namespace CloudCustomers.UnitTests.Systems.Controllers
                 Times.Once
             );
         }
+
+        [Fact]
+        public async Task Get_OnSuccess_ReturnsListOfUsers()
+        {
+            //Arrange
+            var mockUsersService = new Mock<IUserService>();
+            mockUsersService
+                .Setup(service => service.GetAllUsers())
+                .ReturnsAsync(new List<User>());
+
+            var sut = new UsersController(mockUsersService.Object);
+
+            //Act
+            var result = await sut.Get();
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>();
+            var objectResult = (OkObjectResult)result;
+            objectResult.Value.Should().BeOfType<List<User>>();
+            mockUsersService.Verify(
+                service => service.GetAllUsers(),
+                Times.Once
+            );
+        }
     }
 }
