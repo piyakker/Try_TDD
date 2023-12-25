@@ -1,4 +1,5 @@
 
+using CloudCustomers.API.Config;
 using CloudCustomers.API.Services;
 using CloudCustomers.API.Services.Interface;
 
@@ -18,6 +19,9 @@ namespace CloudCustomers.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddHttpClient<IUserService, UserService>();
+            builder.Services.Configure<UsersApiOptions>(
+                builder.Configuration.GetSection("UsersApiOptions")
+            );
 
             var app = builder.Build();
 

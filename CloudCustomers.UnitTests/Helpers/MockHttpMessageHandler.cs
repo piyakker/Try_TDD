@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using CloudCustomers.API.Models;
+using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
 using System;
